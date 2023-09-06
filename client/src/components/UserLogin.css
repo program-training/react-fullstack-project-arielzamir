@@ -1,0 +1,18 @@
+#login-button {
+  border-radius: 15px;
+  margin-left: 15px;
+  background-color: aqua;
+}
+
+#login-button:hover {
+  border: 2px solid black;
+}
+
+#index-button {
+  border-radius: 15px;
+  background-color: aqua;
+}
+
+#index-button:hover {
+  border: 2px solid black;
+}

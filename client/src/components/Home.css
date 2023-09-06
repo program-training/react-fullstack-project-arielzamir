@@ -1,0 +1,13 @@
+#main-header {
+  color: darkslateblue;
+}
+
+.home-buttons {
+  background-color: aqua;
+  border-radius: 15px;
+  margin-right: 25px;
+}
+
+.home-buttons:hover {
+  border: 2px solid black;
+}

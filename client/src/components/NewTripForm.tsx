@@ -1,5 +1,6 @@
 import React, { useState, useRef, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+import "./NewTripForm.css";
 
 export default function NewTripForm() {
   const idRef = useRef<HTMLInputElement | null>(null);
@@ -66,14 +67,6 @@ export default function NewTripForm() {
       <form onSubmit={handleFormSubmit}>
         <input
           type="text"
-          placeholder="Enter an ID"
-          name="id"
-          ref={idRef}
-          value={formData.id}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
           placeholder="Enter a name"
           name="name"
           ref={nameRef}
@@ -112,10 +105,12 @@ export default function NewTripForm() {
           onChange={handleInputChange}
         />
         {imageSource && <img src={imageSource} alt="Trip Image" />}
-        <button type="submit">Save</button>
+        <button type="submit" id="save-button">
+          Save
+        </button>
       </form>
       <Link to="/trips">
-        <button>Go to all the trips</button>
+        <button id="index-button">Go to all the trips</button>
       </Link>
     </div>
   );

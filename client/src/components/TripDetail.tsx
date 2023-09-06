@@ -1,3 +1,4 @@
+// TripDetail.tsx
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./TripDetail.css";
@@ -44,7 +45,10 @@ const TripDetail: React.FC = () => {
       <p>{trip.endDate}</p>
       <img src={trip.image} alt="image" id="card-image" />
       <Link to="/trips">
-        <button id="go-back">Go Back to All Trips</button>
+        <button id="go-back-button">Go Back to All Trips</button>
+      </Link>
+      <Link to={`/update-trip/${trip.id}`}>
+        <button id="update-button">Update item</button>
       </Link>
     </div>
   );

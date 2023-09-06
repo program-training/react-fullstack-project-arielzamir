@@ -1,18 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
+      <h1 id="main-header">Welcome to the Home Page</h1>
       <Link to="/trips">
-        <button>Go to all the trips</button>
+        <button className="home-buttons">Go to all the trips</button>
       </Link>
       <Link to="/register">
-        <button>Go to Registration</button>
+        <button className="home-buttons">Go to Registration</button>
       </Link>
       <Link to="/login">
-        <button>Go to Login</button>
+        <button className="home-buttons">Go to Login</button>
       </Link>
     </div>
   );

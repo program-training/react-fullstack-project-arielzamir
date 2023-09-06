@@ -31,11 +31,9 @@ const Trips: React.FC = () => {
 
   const handleDelete = async (tripId: number) => {
     try {
-      // Send a DELETE request to the server to delete the trip
       await fetch(`http://localhost:3000/api/trips/${tripId}`, {
         method: "DELETE",
       });
-      // Remove the deleted trip from the state
       setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== tripId));
     } catch (error) {
       console.error("Error deleting trip:", error);
@@ -44,17 +42,17 @@ const Trips: React.FC = () => {
 
   return (
     <div>
-      <h1>All Trips</h1>
+      <h1 id="main-header">All Trips</h1>
       <Link to="/">
-        <button>Go to Main Page</button>
+        <button className="nav-buttons">Go to Main Page</button>
       </Link>
       <Link to="/new-trip">
-        <button>Create a New Trip</button>
+        <button className="nav-buttons">Create a New Trip</button>
       </Link>
       <div id="container">
         {trips.map((trip) => (
-          <div id="card" key={trip.id}>
-            <Link to={`/trips/${trip.id}`}>
+          <div className="card" key={trip.id}>
+            <Link to={`/update-trip/${trip.id}`}>
               <button>
                 <h2>{trip.name}</h2>
                 <p>{trip.description}</p>
