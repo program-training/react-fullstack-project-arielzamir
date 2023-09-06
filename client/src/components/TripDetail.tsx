@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import "./TripDetail.css";
 
 interface Trip {
   id: number;
-  title: string;
+  name: string;
   description: string;
+  startDate: string;
+  endDate: string;
+  image: string;
 }
 
 const TripDetail: React.FC = () => {
@@ -32,13 +36,16 @@ const TripDetail: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Trip Details</h1>
-      <Link to="/trips">
-        <button>Go Back to All Trips</button>
-      </Link>
-      <h2>{trip.title}</h2>
+    <div id="card">
+      <h1>Trip Detail</h1>
+      <h2>{trip.name}</h2>
       <p>{trip.description}</p>
+      <p>{trip.startDate}</p>
+      <p>{trip.endDate}</p>
+      <img src={trip.image} alt="image" id="card-image" />
+      <Link to="/trips">
+        <button id="go-back">Go Back to All Trips</button>
+      </Link>
     </div>
   );
 };

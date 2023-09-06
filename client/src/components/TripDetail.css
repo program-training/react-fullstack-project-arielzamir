@@ -1,0 +1,10 @@
+#card {
+  width: 410px;
+  border: 6px solid green;
+  border-radius: 20px;
+}
+
+#go-back {
+  border: 2px solid black;
+  border-radius: 15px;
+}
