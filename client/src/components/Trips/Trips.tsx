@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Trips.css";
+import { BASE_URL } from "../../baseUrl";
 
 interface Trip {
   id: number;
@@ -17,7 +18,7 @@ const Trips: React.FC = () => {
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/trips");
+        const response = await fetch(`${BASE_URL}/trips`);
         const data = await response.json();
         console.log(data);
         setTrips(data);
@@ -31,7 +32,7 @@ const Trips: React.FC = () => {
 
   const handleDelete = async (tripId: number) => {
     try {
-      await fetch(`http://localhost:3000/api/trips/${tripId}`, {
+      await fetch(`${BASE_URL}/trips/${tripId}`, {
         method: "DELETE",
       });
       setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== tripId));
@@ -52,7 +53,7 @@ const Trips: React.FC = () => {
       <div id="container">
         {trips.map((trip) => (
           <div className="card" key={trip.id}>
-            <Link to={`/update-trip/${trip.id}`}>
+            <Link to={`/trips/${trip.id}`}>
               <button>
                 <h2>{trip.name}</h2>
                 <p>{trip.description}</p>

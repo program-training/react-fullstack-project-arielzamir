@@ -1,12 +1,11 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Trips from "./components/Trips";
-import UserRegistration from "./components/UserRegistration";
-import UserLogin from "./components/UserLogin";
-import NewTripForm from "./components/NewTripForm";
-import TripDetail from "./components/TripDetail";
-import UpdateTripForm from "./components/UpdateTripForm";
+import Home from "./components/Home/Home";
+import Trips from "./components/Trips/Trips";
+import UserRegistration from "./components/UserRegistration/UserRegistration";
+import UserLogin from "./components/UserLogin/UserLogin";
+import NewTripForm from "./components/NewTripForm/NewTripForm";
+import TripDetail from "./components/TripDetail/TripDetail";
+import UpdateTripForm from "./components/UpdateTripForm/UpdateTripForm";
 
 const App: React.FC = () => {
   return (

@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import "./UserRegistration.css";
+import "./UserLogin.css";
+import { BASE_URL } from "../../baseUrl";
 
-export default function UserRegistration() {
+export default function UserLogin() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,7 +19,7 @@ export default function UserRegistration() {
 
     try {
       const token = "test-token";
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,21 +28,21 @@ export default function UserRegistration() {
         body: JSON.stringify(formData),
       });
 
-      if (response.status === 201) {
-        console.log("User registered successfully");
-      } else if (response.status === 400) {
-        console.error("User already exists");
+      if (response.status === 200) {
+        console.log("User logged in successfully");
+      } else if (response.status === 401) {
+        console.error("Invalid credentials");
       } else {
-        console.error("Registration failed");
+        console.error("Login failed");
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Error during login:", error);
     }
   };
 
   return (
     <div>
-      <h1>User Registration</h1>
+      <h1>User Login</h1>
       <form onSubmit={handleFormSubmit}>
         <input
           type="email"
@@ -57,12 +58,12 @@ export default function UserRegistration() {
           value={formData.password}
           onChange={handleInputChange}
         />
-        <button type="submit" id="register-button">
-          Register
+        <button type="submit" id="login-button">
+          Login
         </button>
       </form>
       <Link to="/">
-        <button id="index-button">Go back to main page</button>
+        <button id="index-button">Go to Main Page</button>
       </Link>
     </div>
   );

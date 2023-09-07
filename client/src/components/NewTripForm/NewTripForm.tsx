@@ -1,10 +1,9 @@
-import React, { useState, useRef, ChangeEvent, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import "./UpdateTripForm.css";
+import { useState, useRef, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
+import "./NewTripForm.css";
+import { BASE_URL } from "../../baseUrl";
 
-export default function UpdateTripForm() {
-  const { tripId } = useParams<{ tripId: string }>();
-
+export default function NewTripForm() {
   const idRef = useRef<HTMLInputElement | null>(null);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const destinationRef = useRef<HTMLInputElement | null>(null);
@@ -12,6 +11,7 @@ export default function UpdateTripForm() {
   const endDateRef = useRef<HTMLInputElement | null>(null);
 
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     destination: "",
     startDate: "",
@@ -20,22 +20,6 @@ export default function UpdateTripForm() {
   });
 
   const [imageSource, setImageSource] = useState("");
-
-  useEffect(() => {
-    const fetchTripById = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/trips/${tripId}`
-        );
-        const data = await response.json();
-        setFormData(data);
-      } catch (error) {
-        console.error("Error fetching trip:", error);
-      }
-    };
-
-    fetchTripById();
-  }, [tripId]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,31 +35,29 @@ export default function UpdateTripForm() {
 
     try {
       const token = "test-token";
-      const response = await fetch(
-        `http://localhost:3000/api/trips/${tripId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-          body: JSON.stringify({ ...formData, image: imageSource }),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/trips`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({ ...formData, image: imageSource }),
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to update trip data");
+        throw new Error("Failed to save data");
       }
 
-      const updatedData = await response.json();
+      const savedData = await response.json();
 
       setFormData({
         ...formData,
+        id: savedData.id,
       });
 
       idRef.current?.focus();
 
-      console.log("Data updated:", updatedData);
+      console.log("Data saved:", savedData);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -124,12 +106,12 @@ export default function UpdateTripForm() {
           onChange={handleInputChange}
         />
         {imageSource && <img src={imageSource} alt="Trip Image" />}
-        <button type="submit" id="update-button1">
-          Update
+        <button type="submit" id="save-button">
+          Save
         </button>
       </form>
-      <Link to={`/trips/${tripId}`}>
-        <button id="index-button">Go Back to Trip Detail</button>
+      <Link to="/trips">
+        <button id="index-button">Go to all the trips</button>
       </Link>
     </div>
   );

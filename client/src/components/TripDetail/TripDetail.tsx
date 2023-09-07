@@ -1,7 +1,8 @@
 // TripDetail.tsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./TripDetail.css";
+import { BASE_URL } from "../../baseUrl";
 
 interface Trip {
   id: number;
@@ -19,9 +20,7 @@ const TripDetail: React.FC = () => {
   useEffect(() => {
     const fetchTripById = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/trips/${tripId}`
-        );
+        const response = await fetch(`${BASE_URL}/trips/${tripId}`);
         const data = await response.json();
         setTrip(data);
       } catch (error) {
